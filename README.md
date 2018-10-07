@@ -4,7 +4,7 @@ A lovelace card for [Home Assistant](https://github.com/home-assistant/home-assi
 This card allow you to control your forked daapd instance through Home Assistant.
 The following controls are available: `master volume`, `play/pause`, `next/previous`, `on/off`, `output selection`, `individual output volume`.
 
-![Preview”](https://user-images.githubusercontent.com/457678/46584235-03d92100-ca61-11e8-9d4d-969cbca7f88c.gif)
+<img src="https://user-images.githubusercontent.com/457678/46584235-03d92100-ca61-11e8-9d4d-969cbca7f88c.gif" alt="Preview" width="400">
 
 ## Requirements
 - Forked daapd built with websocket support.
