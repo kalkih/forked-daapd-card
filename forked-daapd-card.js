@@ -64,6 +64,7 @@ class ForkedDaapdCard extends LitElement {
 
     const cardConfig = Object.assign({
       icon: config.icon || null,
+      nested: config.nested || false,
       outputs: config.outputs || null,
       ip: config.ip || '127.0.0.1',
       port: config.port || 3689,
@@ -106,7 +107,7 @@ class ForkedDaapdCard extends LitElement {
 
     return html`
       ${this._style()}
-      <ha-card>
+      <ha-card ?nested=${config.nested}>
         <div id='player' class='flex'>
           <div class='flex'>
             <div class='icon'><ha-icon icon=${this._getIcon}></ha-icon></div>
@@ -140,10 +141,11 @@ class ForkedDaapdCard extends LitElement {
     return this._isActive ? html`
       <paper-icon-button class='dropdown'
         icon=${this._icons.dropdown[!this._showOutput]}
-        @click='${(e) => this._showOutput = !this._showOutput}'>
+        @click='${(e) => { e.stopPropagation(); this._showOutput = !this._showOutput}}'>
       </paper-icon-button>
       <paper-slider class='volume-slider'
         @change='${(e) => this._handleVolumeChange(e)}'
+        @click='${e => e.stopPropagation()}'
         min='0' max='100' value=${vol}
         ignore-bar-touch pin>
       </paper-slider>
@@ -187,12 +189,14 @@ class ForkedDaapdCard extends LitElement {
                 ${output.selected ? html`
                   <paper-slider class='volume-slider'
                     @change='${(e) => this._setOutput(e, output.id, {volume: e.target.value})}'
+                    @click='${e => e.stopPropagation()}'
                     min='0' max='100' value=${output.volume}
                     ignore-bar-touch pin>
                   </paper-slider>
                 ` : '' }
                 <paper-toggle-button ?checked=${output.selected}
-                  @change='${(e) => this._setOutput(e, output.id, {selected: !output.selected})}'>
+                  @change='${(e) => this._setOutput(e, output.id, {selected: !output.selected})}'
+                  @click='${e => e.stopPropagation()}'>
                 </paper-toggle-button>
               </div>
             </div>`
@@ -308,6 +312,11 @@ class ForkedDaapdCard extends LitElement {
         ha-card {
           padding: 16px;
           position: relative;
+        }
+        ha-card[nested] {
+          background: none;
+          box-shadow: none;
+          padding: 0;
         }
         ha-card header {
           display: none;
