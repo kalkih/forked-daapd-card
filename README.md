@@ -19,7 +19,7 @@ The following controls are available: `master volume`, `play/pause`, `next/previ
 
 ```yaml
 resources:
-  - url: /local/forked-daapd-card.js?v=0.0.1
+  - url: /local/forked-daapd-card.js?v=0.0.2
     type: module
 ```
 
@@ -35,7 +35,7 @@ git clone https://github.com/kalkih/forked-daapd-card.git
 
 ```yaml
 resources:
-  - url: /local/forked-daapd-card/forked-daapd-card.js?v=0.0.1
+  - url: /local/forked-daapd-card/forked-daapd-card.js?v=0.0.2
     type: module
 ```
 
@@ -47,7 +47,7 @@ resources:
 
 ```yaml
 resources:
-  - url: /local/forked-daapd-card.js?v=0.0.1
+  - url: /local/forked-daapd-card.js?v=0.0.2
     type: module
 ```
 
@@ -55,7 +55,7 @@ If you went the `git clone` route, just run `git pull` from inside your `config/
 
 ```yaml
 resources:
-  - url: /local/forked-daapd-card/forked-daapd-card.js?v=0.0.1
+  - url: /local/forked-daapd-card/forked-daapd-card.js?v=0.0.2
     type: module
 ```
 
