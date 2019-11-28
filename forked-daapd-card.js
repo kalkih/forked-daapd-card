@@ -1,5 +1,12 @@
 import { LitElement, html } from 'https://unpkg.com/@polymer/lit-element@0.6.2/lit-element.js?module';
 
+if (!customElements.get('ha-switch')) {
+  customElements.define(
+    'ha-switch',
+    class extends customElements.get('paper-toggle-button') {},
+  );
+}
+
 class ForkedDaapdCard extends LitElement {
   constructor() {
     super();
@@ -193,10 +200,10 @@ class ForkedDaapdCard extends LitElement {
                     ignore-bar-touch pin>
                   </paper-slider>
                 ` : '' }
-                <paper-toggle-button ?checked=${output.selected}
+                <ha-switch ?checked=${output.selected}
                   @change='${(e) => this._setOutput(e, output.id, {selected: !output.selected})}'
                   @click='${e => e.stopPropagation()}'>
-                </paper-toggle-button>
+                </ha-switch>
               </div>
             </div>`
         )}
