@@ -1,4 +1,25 @@
-import { LitElement, html } from 'https://unpkg.com/@polymer/lit-element@0.6.2/lit-element.js?module';
+import { LitElement, html } from 'https://unpkg.com/lit-element@2.0.1/lit-element.js?module';
+
+if (!customElements.get('ha-slider')) {
+  customElements.define(
+    'ha-slider',
+    class extends customElements.get('paper-slider') {},
+  );
+}
+
+if (!customElements.get('ha-icon-button')) {
+  customElements.define(
+    'ha-icon-button',
+    class extends customElements.get('paper-icon-button') {},
+  );
+}
+
+if (!customElements.get('ha-icon')) {
+  customElements.define(
+    'ha-icon',
+    class extends customElements.get('iron-icon') {},
+  );
+}
 
 if (!customElements.get('ha-switch')) {
   customElements.define(
@@ -145,27 +166,27 @@ class ForkedDaapdCard extends LitElement {
   _computeControls() {
     const vol = this.entity.attributes.volume_level * 100 || 0;
     return this._isActive ? html`
-      <paper-icon-button class='dropdown'
+      <ha-icon-button class='dropdown'
         icon=${this._icons.dropdown[!this._showOutput]}
         @click='${(e) => { e.stopPropagation(); this._showOutput = !this._showOutput}}'>
-      </paper-icon-button>
-      <paper-slider class='volume-slider'
+      </ha-icon-button>
+      <ha-slider class='volume-slider'
         @change='${(e) => this._handleVolumeChange(e)}'
         @click='${e => e.stopPropagation()}'
         min='0' max='100' value=${vol}
         ignore-bar-touch pin>
-      </paper-slider>
+      </ha-slider>
       <div class='control-buttons'>
-        <paper-icon-button id='prev-button' icon=${this._icons['prev']}
+        <ha-icon-button id='prev-button' icon=${this._icons['prev']}
           @click='${(e) => this._callService(e, "media_previous_track")}'>
-        </paper-icon-button>
-        <paper-icon-button id='play-button'
+        </ha-icon-button>
+        <ha-icon-button id='play-button'
           icon=${this._icons.playing[this._isPlaying]}
           @click='${(e) => this._callService(e, "media_play_pause")}'>
-        </paper-icon-button>
-        <paper-icon-button id='next-button' icon=${this._icons['next']}
+        </ha-icon-button>
+        <ha-icon-button id='next-button' icon=${this._icons['next']}
           @click='${(e) => this._callService(e, "media_next_track")}'>
-        </paper-icon-button>
+        </ha-icon-button>
       </div>` : '';
   }
 
@@ -193,12 +214,12 @@ class ForkedDaapdCard extends LitElement {
               </div>
               <div class='power-state flex'>
                 ${output.selected ? html`
-                  <paper-slider class='volume-slider'
+                  <ha-slider class='volume-slider'
                     @change='${(e) => this._setOutput(e, output.id, {volume: e.target.value})}'
                     @click='${e => e.stopPropagation()}'
                     min='0' max='100' value=${output.volume}
                     ignore-bar-touch pin>
-                  </paper-slider>
+                  </ha-slider>
                 ` : '' }
                 <ha-switch ?checked=${output.selected}
                   @change='${(e) => this._setOutput(e, output.id, {selected: !output.selected})}'
@@ -245,11 +266,11 @@ class ForkedDaapdCard extends LitElement {
 
   _computePower() {
     return html`
-      <paper-icon-button id='power-button'
+      <ha-icon-button id='power-button'
         icon=${this._icons['power']}
         @click='${(e) => this._callService(e, "toggle")}'
         ?color=${this._isActive}>
-      </paper-icon-button>`;
+      </ha-icon-button>`;
   }
 
   _callService(e, service, options, component = 'media_player') {
@@ -330,7 +351,7 @@ class ForkedDaapdCard extends LitElement {
         #player {
           flex-flow: column;
         }
-        #player paper-slider {
+        #player ha-slider {
           min-width: 125px;
           height: 40px;
           flex: 1;
@@ -361,9 +382,9 @@ class ForkedDaapdCard extends LitElement {
           width: 40px;
           line-height: 40px;
           text-align: center;
-          color: var(--paper-item-icon-color, #44739e);
+          color: var(--ha-item-icon-color, #44739e);
         }
-        paper-icon-button[color] {
+        ha-icon-button[color] {
           color: var(--accent-color);
         }
         .info {
@@ -406,7 +427,7 @@ class ForkedDaapdCard extends LitElement {
           justify-content: flex-end;
           flex: 2 1 60px;
         }
-        .output paper-slider {
+        .output ha-slider {
           min-width: 10px;
           max-width: 400px;
           height: 40px;
@@ -456,7 +477,7 @@ class ForkedDaapdCard extends LitElement {
           height: 2px;
           background: var(--primary-background-color);
         }
-        paper-toggle-button {
+        ha-toggle-button {
           cursor: pointer;
         }
       </style>
